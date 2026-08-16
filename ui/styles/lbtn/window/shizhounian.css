@@ -232,8 +232,9 @@
 
 /* 牌堆数显示 */
 .cardRoundNumber {
-	top: 16px;
-	left: 25px;
+	top: auto;
+	bottom: 0;
+	left: 0;
 	font-weight: 400;
 	font-family: "yuanli";
 	text-shadow:
