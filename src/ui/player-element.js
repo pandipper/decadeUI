@@ -128,6 +128,7 @@ function setupIdentityDisplay(realIdentity, player) {
 					babysha: "image/styles/baby/identity3_",
 					on: "image/styles/decade/identity_",
 					othersOff: "image/styles/decade/identity_",
+				dyon: "image/styles/decade/identity_",
 					codename: "image/styles/codename/identity5_",
 				};
 				const srcPrefix = srcMap[style] || "image/styles/shousha/identity2_";
