@@ -278,7 +278,7 @@ export function initApp() {
 					);
 				};
 
-				const styleFileMap = { on: "main1.js", othersOff: "main3.js" };
+				const styleFileMap = { on: "main1.js", othersOff: "main3.js", dyon: "main1.js" };
 				const fileName = styleFileMap[lib.config.extension_十周年UI_newDecadeStyle] ?? "main2.js";
 				folders.forEach(dir => readAndEval(dir, fileName));
 			});

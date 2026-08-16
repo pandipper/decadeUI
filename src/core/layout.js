@@ -75,7 +75,7 @@ export function createLayoutModule() {
 				}
 			} else {
 				const style = getStyle();
-				const shouldCenter = style === "codename" || ((style === "on" || style === "othersOff") && !lib.config.phonelayout);
+				const shouldCenter = style === "codename" || style === "dyon" || ((style === "on" || style === "othersOff") && !lib.config.phonelayout);
 				if (shouldCenter) {
 					xStart = (ui.arena.offsetWidth - totalW) / 2 - boundsX;
 				}
