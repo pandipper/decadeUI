@@ -786,3 +786,200 @@
 	left: calc(50% - (var(--w) / 2));
 	top: 9px;
 }
+
+/**
+ * dyon 布局
+ *
+ * 窄屏直接继承新版 nova 的安全座位布局；宽屏恢复旧版 dyon 将对手席位
+ * 向画面两侧和上方展开的意图，并使用新版玩家宽度变量参与居中计算。
+ */
+
+#arena[data-new-decade-style="dyon"] > .player {
+	--w: clamp(300px, 18.75vw, 360px) !important;
+}
+
+@media (min-width: 900px) and (min-height: 600px) {
+	/* 8人座 */
+	#arena[data-layout="nova"][data-new-decade-style="dyon"][data-number="8"] > .player[data-position="1"] {
+		left: auto;
+		right: clamp(12px, 1.5vw, 24px);
+		top: 46.5%;
+	}
+
+	#arena[data-layout="nova"][data-new-decade-style="dyon"][data-number="8"] > .player[data-position="2"] {
+		left: auto;
+		right: 5%;
+		top: 17.5%;
+	}
+
+	#arena[data-layout="nova"][data-new-decade-style="dyon"][data-number="8"] > .player[data-position="3"] {
+		left: auto;
+		right: calc(28% - (var(--w) / 2));
+		top: 8px;
+	}
+
+	#arena[data-layout="nova"][data-new-decade-style="dyon"][data-number="8"] > .player[data-position="4"] {
+		left: calc(29% - (var(--w) / 2));
+		right: auto;
+		top: 8px;
+	}
+
+	#arena[data-layout="nova"][data-new-decade-style="dyon"][data-number="8"] > .player[data-position="5"] {
+		left: 6%;
+		right: auto;
+		top: 8px;
+	}
+
+	#arena[data-layout="nova"][data-new-decade-style="dyon"][data-number="8"] > .player[data-position="6"] {
+		left: clamp(12px, 1.5vw, 24px);
+		right: auto;
+		top: 28%;
+	}
+
+	#arena[data-layout="nova"][data-new-decade-style="dyon"][data-number="8"] > .player[data-position="7"] {
+		left: clamp(12px, 1.5vw, 24px);
+		right: auto;
+		top: 56%;
+	}
+
+	/* 7人座 */
+	#arena[data-layout="nova"][data-new-decade-style="dyon"][data-number="7"] > .player[data-position="1"] {
+		left: auto;
+		right: 0;
+		top: calc(50% - 90px);
+	}
+
+	#arena[data-layout="nova"][data-new-decade-style="dyon"][data-number="7"] > .player[data-position="2"] {
+		left: auto;
+		right: 0;
+		top: 4.5%;
+	}
+
+	#arena[data-layout="nova"][data-new-decade-style="dyon"][data-number="7"] > .player[data-position="3"] {
+		left: auto;
+		right: calc(29.8% - (var(--w) / 2));
+		top: 8px;
+	}
+
+	#arena[data-layout="nova"][data-new-decade-style="dyon"][data-number="7"] > .player[data-position="4"] {
+		left: calc(29.8% - (var(--w) / 2));
+		right: auto;
+		top: 8px;
+	}
+
+	#arena[data-layout="nova"][data-new-decade-style="dyon"][data-number="7"] > .player[data-position="5"] {
+		left: 0;
+		right: auto;
+		top: 4.5%;
+	}
+
+	#arena[data-layout="nova"][data-new-decade-style="dyon"][data-number="7"] > .player[data-position="6"] {
+		left: 0;
+		right: auto;
+		top: calc(50% - 90px);
+	}
+
+	/* 5人座 */
+	#arena[data-layout="nova"][data-new-decade-style="dyon"][data-number="5"] > .player[data-position="1"] {
+		left: auto;
+		right: 0;
+		top: 30%;
+	}
+
+	#arena[data-layout="nova"][data-new-decade-style="dyon"][data-number="5"] > .player[data-position="2"] {
+		left: auto;
+		right: calc(29% - (var(--w) / 2));
+		top: 12%;
+	}
+
+	#arena[data-layout="nova"][data-new-decade-style="dyon"][data-number="5"] > .player[data-position="3"] {
+		left: calc(29% - (var(--w) / 2));
+		right: auto;
+		top: 12%;
+	}
+
+#arena[data-layout="nova"][data-new-decade-style="dyon"][data-number="5"] > .player[data-position="4"] {
+		left: 0;
+		right: auto;
+		top: 30%;
+	}
+
+	/* 4人座 */
+	#arena[data-layout="nova"][data-new-decade-style="dyon"][data-number="4"] > .player[data-position="1"] {
+		left: auto;
+		right: 0;
+		top: 18%;
+	}
+
+	#arena[data-layout="nova"][data-new-decade-style="dyon"][data-number="4"] > .player[data-position="2"] {
+		left: calc(40% - (var(--w) / 2));
+		right: auto;
+		top: 12%;
+	}
+
+	#arena[data-layout="nova"][data-new-decade-style="dyon"][data-number="4"] > .player[data-position="3"] {
+		left: 0;
+		right: auto;
+		top: 18%;
+	}
+
+	/* 3人座 */
+	#arena[data-layout="nova"][data-new-decade-style="dyon"][data-number="3"] > .player[data-position="1"] {
+		left: calc(62% - (var(--w) / 2));
+		right: auto;
+		top: 15%;
+	}
+
+	#arena[data-layout="nova"][data-new-decade-style="dyon"][data-number="3"] > .player[data-position="2"] {
+		left: 18%;
+		right: auto;
+		top: 15%;
+	}
+
+	/* 2人座 */
+	#arena[data-layout="nova"][data-new-decade-style="dyon"][data-number="2"] > .player[data-position="1"] {
+		left: calc(40% - (var(--w) / 2));
+		right: auto;
+		top: 9px;
+	}
+}
+
+/* 六人局唯一定位源：不依赖 data-layout，桌面与安卓共用相同的座位关系。 */
+@media (min-width: 900px) and (min-height: 600px) {
+	#arena[data-new-decade-style="dyon"][data-number="6"] > .player[data-position="0"] {
+		left: auto;
+		right: var(--six-player-right-safe);
+		top: auto;
+		bottom: var(--six-player-bottom-safe);
+	}
+
+	#arena[data-new-decade-style="dyon"][data-number="6"] > .player[data-position="1"] {
+		left: auto;
+		right: var(--six-player-right-safe);
+		top: calc(var(--six-player-top) + var(--six-player-height) + var(--six-player-row-gap));
+	}
+
+	#arena[data-new-decade-style="dyon"][data-number="6"] > .player[data-position="2"] {
+		left: auto;
+		right: var(--six-player-right-safe);
+		top: var(--six-player-top);
+	}
+
+	#arena[data-new-decade-style="dyon"][data-number="6"] > .player[data-position="3"] {
+		left: calc(50% - var(--six-player-width) / 2);
+		right: auto;
+		top: var(--six-player-top);
+	}
+
+	#arena[data-new-decade-style="dyon"][data-number="6"] > .player[data-position="4"] {
+		left: var(--six-player-left-safe);
+		right: auto;
+		top: var(--six-player-top);
+	}
+
+	#arena[data-new-decade-style="dyon"][data-number="6"] > .player[data-position="5"] {
+		left: var(--six-player-left-safe);
+		right: auto;
+		top: calc(var(--six-player-top) + var(--six-player-height) + var(--six-player-row-gap));
+	}
+}

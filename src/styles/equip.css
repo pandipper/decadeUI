@@ -471,3 +471,12 @@ body[data-style="codename"] .equips-wrap > .equips-back > div {
 .equips-wrap > .equips > div.equip-card-selectable.selected::before {
 	opacity: 1;
 }
+
+/** dyon：保留旧版其他玩家装备栏靠右、定宽显示的布局意图。 */
+body[data-style="dyon"] .player > .equips,
+body[data-style="dyon"] #arena > .player:not(.minskin) > .equips {
+	left: auto;
+	right: 6%;
+	width: min(100px, 76%);
+	transform: translateX(2px);
+}
