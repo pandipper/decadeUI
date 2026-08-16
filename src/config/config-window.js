@@ -287,6 +287,7 @@ function getConfigsByTab(tabId) {
 			{ key: "dynamicSkin", name: "动态皮肤", type: "toggle" },
 			{ key: "dynamicSkinOutcrop", name: "动皮露头", type: "toggle" },
 			{ key: "killEffect", name: "击杀特效", type: "toggle" },
+			{ key: "playerDieEffect", name: "玩家阵亡特效", type: "toggle" },
 		],
 		card: [
 			{ isTitle: true, name: "卡牌效果" },
