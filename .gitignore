@@ -17,3 +17,7 @@ assets/dynamic/*
 
 # 打包命令
 build.bat
+
+# 构建依赖
+node_modules/
+package-lock.json
