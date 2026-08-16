@@ -7,7 +7,7 @@
 import { lib, game, ui, get, ai, _status } from "noname";
 
 /** @type {string[]} Alt+1~6 对应的样式 */
-const STYLES = ["on", "off", "othersOff", "onlineUI", "babysha", "codename"];
+const STYLES = ["on", "off", "othersOff", "onlineUI", "babysha", "codename", "dyon"];
 
 /**
  * 处理样式快捷键
@@ -17,7 +17,7 @@ function handleStyleHotkey(event) {
 	if (!event.altKey) return;
 
 	const keyNum = parseInt(event.key);
-	if (isNaN(keyNum) || keyNum < 1 || keyNum > 6) return;
+	if (isNaN(keyNum) || keyNum < 1 || keyNum > 7) return;
 
 	event.preventDefault();
 

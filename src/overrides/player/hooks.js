@@ -95,7 +95,7 @@ function handleSkillAnimate(player, name) {
 	player.querySelector(".tipskill")?.remove();
 
 	const style = cfg.extension_十周年UI_newDecadeStyle;
-	if (SKIP_SKILL_NAMES.includes(name) || style === "othersOff" || style === "on") {
+	if (SKIP_SKILL_NAMES.includes(name) || style === "othersOff" || style === "on" || style === "dyon") {
 		return;
 	}
 

@@ -1,116 +1,82 @@
-"use strict";
+import { ui, game, lib, _status } from "noname";
 
-/**
- * @fileoverview 扩展快捷开关 - 关闭其他/恢复其他扩展
- * 用户/其他扩展可以在自己扩展里通过设置 _status.PROTECTED_EXTENSIONS 来追加自己需要保护的扩展
- */
+const UI_NAME = "\u5341\u5468\u5e74UI";
+const CONFIG_KEY = `extension_${UI_NAME}_closedExtensions`;
 
-import { lib, game, ui, get, ai, _status } from "noname";
+function getOtherExtensions() {
+	const protectedExtensions = _status.PROTECTED_EXTENSIONS ?? [];
+	return (lib.config.extensions || []).filter(name => name !== UI_NAME && !protectedExtensions.includes(name));
+}
 
-/** @type {string} 存储键名 */
-const STORAGE_KEY = "extension_十周年UI_closedExtensions";
+function getClosedExtensions() {
+	const value = lib.config[CONFIG_KEY];
+	return Array.isArray(value) ? value : [];
+}
 
-/**
- * 获取当前扩展名称
- * @returns {string}
- */
-const getCurrentExtName = () => window.decadeUIName || "十周年UI";
+function hasClosedExtensions() {
+	return getClosedExtensions().length > 0;
+}
 
-/**
- * 获取受保护的扩展白名单（动态读取，确保其他扩展有机会设置）
- * @returns {string[]}
- */
-const getProtectedExtensions = () => _status.PROTECTED_EXTENSIONS ?? [];
+function getToggleLabel() {
+	return hasClosedExtensions() ? "\u6062\u590d\u5176\u4ed6\u6269\u5c55" : "\u5173\u95ed\u5176\u4ed6\u6269\u5c55";
+}
 
-/**
- * 获取其他扩展列表
- * @returns {string[]}
- */
-const getOtherExtensions = () => {
-	const current = getCurrentExtName();
-	const protectedList = getProtectedExtensions();
-	return (lib.config.extensions || []).filter(ext => ext !== current && !protectedList.includes(ext));
-};
-
-/**
- * 获取已启用的扩展列表
- * @returns {string[]}
- */
-const getEnabledExtensions = () => getOtherExtensions().filter(ext => lib.config[`extension_${ext}_enable`]);
-
-/**
- * 获取已关闭的扩展列表
- * @returns {string[]}
- */
-const getClosedExtensions = () => {
-	const saved = lib.config[STORAGE_KEY];
-	return Array.isArray(saved) ? saved : [];
-};
-
-/**
- * 检查是否有已关闭的扩展
- * @returns {boolean}
- */
-const hasClosedExtensions = () => getClosedExtensions().length > 0;
-
-/**
- * 获取按钮文本
- * @returns {string}
- */
-const getButtonText = () => (hasClosedExtensions() ? "恢复其他扩展" : "关闭其他扩展");
-
-/**
- * 切换扩展状态
- */
-const toggleExtensions = () => {
-	const hasClosed = hasClosedExtensions();
-	const list = hasClosed ? getClosedExtensions() : getEnabledExtensions();
-
-	if (list.length === 0) {
-		alert(hasClosed ? "没有需要恢复的扩展" : "没有其他已启用的扩展");
+function toggleExtensions() {
+	const restoring = hasClosedExtensions();
+	const names = restoring
+		? getClosedExtensions()
+		: getOtherExtensions().filter(name => lib.config[`extension_${name}_enable`]);
+	if (names.length === 0) {
+		alert(restoring ? "\u6ca1\u6709\u9700\u8981\u6062\u590d\u7684\u6269\u5c55" : "\u6ca1\u6709\u5176\u4ed6\u5df2\u542f\u7528\u7684\u6269\u5c55");
 		return;
 	}
-
-	const action = hasClosed ? "恢复其他" : "关闭其他";
-	const extList = list.map(ext => `· ${ext}`).join("\n");
-	if (!confirm(`确定${action}以下 ${list.length} 个扩展？\n\n${extList}\n\n将自动重启游戏。`)) return;
-
-	if (hasClosed) {
-		list.forEach(ext => {
-			if (lib.config.extensions?.includes(ext)) {
-				game.saveConfig(`extension_${ext}_enable`, true);
-			}
+	const action = restoring ? "\u6062\u590d\u5176\u4ed6" : "\u5173\u95ed\u5176\u4ed6";
+	const list = names.map(name => `\u00b7 ${name}`).join("\n");
+	if (!confirm(`\u786e\u5b9a${action}\u4ee5\u4e0b ${names.length} \u4e2a\u6269\u5c55\uff1f\n\n${list}\n\n\u5c06\u81ea\u52a8\u91cd\u542f\u6e38\u620f\u3002`)) return;
+	if (restoring) {
+		names.forEach(name => {
+			if (lib.config.extensions?.includes(name)) game.saveConfig(`extension_${name}_enable`, true);
 		});
-		game.saveConfig(STORAGE_KEY, []);
+		game.saveConfig(CONFIG_KEY, []);
 	} else {
-		game.saveConfig(STORAGE_KEY, list);
-		list.forEach(ext => game.saveConfig(`extension_${ext}_enable`, false));
+		game.saveConfig(CONFIG_KEY, names);
+		names.forEach(name => game.saveConfig(`extension_${name}_enable`, false));
 	}
-
 	setTimeout(() => game.reload(), 100);
-};
+}
 
-/**
- * 初始化扩展快捷开关
- */
-export function setupExtensionToggle() {
-	// 暴露方法供config调用
-	if (window.decadeUI) {
-		window.decadeUI.toggleExtensions = toggleExtensions;
-	}
+const TOGGLE_LABELS = new Set(["\u5173\u95ed\u5176\u4ed6\u6269\u5c55", "\u6062\u590d\u5176\u4ed6\u6269\u5c55"]);
 
-	// 顶部菜单按钮
+function getToggleButtonCandidates() {
+	const nodes = [
+		...document.querySelectorAll(".decade-extension-toggle"),
+		...document.querySelectorAll("#system div, #system1 div, #system2 div"),
+	];
+	return [...new Set(nodes)].filter(
+		node => node.classList?.contains("decade-extension-toggle") || TOGGLE_LABELS.has(node.textContent?.trim()),
+	);
+}
+
+function setupExtensionToggle() {
+	if (window.decadeUI) window.decadeUI.toggleExtensions = toggleExtensions;
+	if (window._decadeUIExtensionToggleSetup) return;
+	window._decadeUIExtensionToggleSetup = true;
+
+	const removeToggleButtons = () => getToggleButtonCandidates().forEach(node => node.remove());
+	removeToggleButtons();
+
 	const timer = setInterval(() => {
 		if (!ui.system1 && !ui.system2) return;
 		clearInterval(timer);
 
-		const btn = ui.create.system(getButtonText(), toggleExtensions, true);
-
-		const _saveConfig = game.saveConfig;
-		game.saveConfig = function (key) {
-			const result = _saveConfig.apply(this, arguments);
-			if (key === STORAGE_KEY) btn.innerHTML = getButtonText();
-			return result;
-		};
+		removeToggleButtons();
+		if (!window._decadeUIExtensionToggleObserver) {
+			window._decadeUIExtensionToggleObserver = new MutationObserver(removeToggleButtons);
+			[document.getElementById("system"), ui.system1, ui.system2].filter(Boolean).forEach(system =>
+				window._decadeUIExtensionToggleObserver.observe(system, { childList: true, subtree: true }),
+			);
+		}
 	}, 500);
 }
+
+export { setupExtensionToggle };

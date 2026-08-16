@@ -230,6 +230,8 @@ export function playerDieAfter() {
 	this.stopDynamic();
 	this.node.gainSkill.innerHTML = null;
 
+	if (lib.config.extension_十周年UI_playerDieEffect === false) return;
+
 	if (!this.node.dieidentity) {
 		this.node.dieidentity = ui.create.div("died-identity", this);
 	}
@@ -237,7 +239,7 @@ export function playerDieAfter() {
 
 	const player = this;
 	const decadeUI = window.decadeUI;
-	const identity = decadeUI.getPlayerIdentity(this);
+	const identity = (decadeUI.getPlayerIdentity(this) || this.identity || "").replace(/2$/, "");
 	const style = decadeUI.config.newDecadeStyle;
 
 	const url = getDeathImageUrl(style, identity, player);
@@ -286,6 +288,7 @@ function getDeathImageUrl(style, identity, player) {
 		codename: `codename/dead_${identity}.png`,
 		on: `decade/dead_${identity}.png`,
 		othersOff: `decade/dead_${identity}.png`,
+		dyon: `decade/dead_${identity}.png`,
 	};
 
 	if (styleMap[style]) {

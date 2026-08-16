@@ -53,7 +53,7 @@ export const outward_title = createCollapseTitle("outward_title", "整体外观"
  */
 export const newDecadeStyle = {
 	name: "切换样式",
-	intro: "切换武将边框样式和界面布局，选择不同设置后游戏会自动重启，电脑端支持alt+123456快捷切换",
+	intro: "切换武将边框样式和界面布局，选择不同设置后游戏会自动重启，电脑端支持alt+1234567快捷切换",
 	init: "on",
 	item: {
 		on: "十周年",
@@ -62,6 +62,7 @@ export const newDecadeStyle = {
 		onlineUI: "online",
 		babysha: "欢乐三国杀",
 		codename: "名将杀",
+		dyon: "动皮布局",
 	},
 	onclick: onNewDecadeStyleClick,
 	update: onNewDecadeStyleUpdate,
@@ -167,6 +168,16 @@ export const killEffect = {
 };
 
 /**
+ * 玩家阵亡特效配置
+ * @type {Object}
+ */
+export const playerDieEffect = {
+	name: "玩家阵亡特效",
+	intro: "开启后，阵亡时显示身份图片",
+	init: true,
+};
+
+/**
  * 整体外观折叠结束标记
  * @type {Object}
  */
@@ -190,5 +201,6 @@ export const appearanceConfigs = {
 	dynamicSkin,
 	dynamicSkinOutcrop,
 	killEffect,
+	playerDieEffect,
 	outward_title_end,
 };
