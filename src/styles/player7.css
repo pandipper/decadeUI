@@ -1,0 +1,466 @@
+@import url("./player1.css");
+
+/**
+ * dyon 玩家区域。
+ * 复用新版十周年玩家结构，只保留与动态皮肤无关的个人布局意图。
+ */
+
+#arena[data-new-decade-style="dyon"] > .player:not(.minskin) > .identity {
+	left: -15px;
+	top: auto;
+	right: auto;
+	bottom: 27px;
+	width: 29px;
+	height: 31px;
+}
+
+#arena[data-new-decade-style="dyon"] > .player.dead > div {
+	filter: grayscale(0.2);
+}
+
+#arena[data-new-decade-style="dyon"] > .player > .died-identity {
+	left: auto;
+	right: 6%;
+}
+
+#arena[data-new-decade-style="dyon"] > .player:not([data-position="0"]) > .judges {
+	left: 0;
+	right: auto;
+	top: auto;
+	bottom: -1%;
+	justify-content: flex-end;
+	font-size: 12px;
+	text-align: right;
+	z-index: 99;
+}
+
+#arena[data-new-decade-style="dyon"] > .player > .chain {
+	left: -10px;
+	top: 72%;
+	width: 106px;
+	height: 26px;
+	background-position-x: center;
+	transform: rotate(45deg);
+	overflow: hidden;
+}
+
+/** dyon 横版武将框 */
+#arena[data-new-decade-style="dyon"] > .player,
+#arena[data-new-decade-style="dyon"] > .player:not(.minskin),
+#arena[data-new-decade-style="dyon"] > .player:not(.minskin):not([data-position="0"]) {
+	--w: clamp(300px, 18.75vw, 360px) !important;
+	width: var(--w) !important;
+	height: calc(var(--w) / 2) !important;
+}
+
+#arena[data-new-decade-style="dyon"] > .player[data-position="0"],
+#arena[data-new-decade-style="dyon"] .player[data-position="0"] {
+	--w: clamp(300px, 18.75vw, 360px) !important;
+	width: var(--w) !important;
+	height: calc(var(--w) / 2) !important;
+	min-width: var(--w) !important;
+	min-height: calc(var(--w) / 2) !important;
+}
+
+#arena[data-new-decade-style="dyon"] > .player::before,
+#arena[data-new-decade-style="dyon"] > .player::after {
+	width: 100%;
+	height: 100%;
+}
+
+#arena[data-new-decade-style="dyon"] > .player > .camp-wrap {
+	left: -19px;
+	top: -9px;
+	width: 37px;
+	height: 128px;
+	z-index: 88;
+}
+
+#arena[data-new-decade-style="dyon"] > .player > .camp-wrap > .camp-back {
+	top: 24%;
+	bottom: 1%;
+}
+
+#arena[data-new-decade-style="dyon"] > .player > .camp-wrap > .camp-border {
+	left: 0;
+	top: 0;
+	width: 37px;
+	height: 128px;
+	background-size: 37px 128px;
+	z-index: 88;
+}
+
+#arena[data-new-decade-style="dyon"] > .player > .camp-wrap > .avatar-name,
+#arena[data-new-decade-style="dyon"] > .player > .camp-wrap > .avatar-name-default,
+#arena[data-new-decade-style="dyon"] > .player > .camp-wrap > .camp-back {
+	writing-mode: vertical-rl;
+}
+
+#arena[data-new-decade-style="dyon"] > .player > .camp-wrap > .avatar-name {
+	top: 28px;
+	height: 96px;
+	z-index: 89;
+}
+
+#arena[data-new-decade-style="dyon"] > .player > .camp-wrap > .camp-name {
+	position: relative;
+	z-index: 89;
+	height: 34%;
+	font-size: 24px;
+}
+
+#arena[data-new-decade-style="dyon"] > .player > .camp-wrap > .avatar-name-default,
+#arena[data-new-decade-style="dyon"] > .player > .camp-wrap > .avatar2-name-default {
+	z-index: 89;
+}
+
+#arena[data-new-decade-style="dyon"] > .player > .identity {
+	left: -15px;
+	bottom: 20px !important;
+	z-index: 89;
+}
+
+#arena[data-new-decade-style="dyon"] > .player > .name.name2 {
+	top: 24px;
+	height: 96px;
+	z-index: 89;
+}
+
+#arena[data-new-decade-style="dyon"] > .player > .hp-wrap {
+	right: -2px;
+	bottom: -5px;
+	z-index: 88;
+}
+
+#arena[data-new-decade-style="dyon"] > .player > .judges {
+	left: 0;
+	right: auto;
+	top: auto;
+	bottom: -1%;
+	justify-content: flex-end;
+	width: auto;
+	z-index: 99;
+}
+
+#arena[data-new-decade-style="dyon"] > .player > .primary-avatar,
+#arena[data-new-decade-style="dyon"] > .player > .deputy-avatar {
+	z-index: 61;
+}
+
+#arena[data-new-decade-style="dyon"] > .player > .dynamic-wrap {
+	z-index: 60;
+}
+
+/* 限定技/技能标记必须留在横框内部 */
+#arena[data-new-decade-style="dyon"] > .player > .dui-marks {
+	top: 24px !important;
+	right: 8px !important;
+	max-width: calc(100% - 48px);
+	z-index: 90;
+	overflow: visible;
+}
+
+#arena[data-new-decade-style="dyon"] > .player > .dui-marks > .mark {
+	max-width: 28px;
+	z-index: 91;
+}
+
+#arena[data-new-decade-style="dyon"] > .player > .dui-marks > .mark > .mark-count {
+	right: -2px;
+	z-index: 92;
+}
+
+/* dyon：沿用旧版横框的右侧技能标记，不再使用竖直灯笼堆叠 */
+#arena[data-new-decade-style="dyon"] > .player > .dui-marks {
+	left: auto !important;
+	top: 34px !important;
+	right: -3px !important;
+	width: auto !important;
+	max-width: 80px;
+	flex-direction: column;
+	z-index: 90;
+}
+
+#arena[data-new-decade-style="dyon"] > .player > .dui-marks > .mark {
+	display: flex;
+	width: 40px;
+	height: 18px;
+	margin-bottom: 1px;
+	white-space: nowrap;
+	background-image: url("../../image/ui/mark/player_mark.png");
+	background-size: 100% 100%;
+}
+
+#arena[data-new-decade-style="dyon"] > .player > .dui-marks > .mark > .mark-text {
+	display: inline;
+	position: static;
+	width: auto;
+	height: auto;
+	line-height: 18px;
+	font-size: 11px;
+	border-radius: 0;
+	background: none;
+	box-shadow: none;
+	animation: none;
+}
+
+#arena[data-new-decade-style="dyon"] > .player > .dui-marks > .mark > .mark-text::before {
+	display: none;
+}
+
+#arena[data-new-decade-style="dyon"] > .player > .dui-marks > .mark > .mark-count {
+	display: inline;
+	position: static;
+	width: auto;
+	height: auto;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	line-height: 18px;
+	font-size: 11px;
+	font-weight: inherit;
+	border-radius: 0;
+	background: none;
+	box-shadow: none;
+}
+
+#arena[data-new-decade-style="dyon"] > .player > .card-count {
+	left: -12px !important;
+	right: auto !important;
+	bottom: -6px !important;
+	z-index: 90 !important;
+}
+
+/* dyon：进度/提示条放到横框下沿，不能横穿武将头像 */
+#arena[data-new-decade-style="dyon"] > .player .tipContainer {
+	right: 28px !important;
+	bottom: 24px !important;
+	width: auto !important;
+	max-width: 42% !important;
+	z-index: 110 !important;
+}
+
+#arena[data-new-decade-style="dyon"] > .player .tipContainer > .tip {
+	width: auto !important;
+	max-width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/* dyon：沿用旧版武将前缀/版本角标数值 */
+#arena[data-new-decade-style="dyon"] > .player > [class$="-mark"] {
+	position: absolute;
+	top: 107px !important;
+	left: -11px !important;
+	width: 22px !important;
+	height: 34px !important;
+	background-size: 100% 100%;
+	z-index: 87 !important;
+}
+
+/* dyon 横版框：沿用旧版精灵动画，按横版玩家框缩放每一帧 */
+@keyframes kf-dyon-glow {
+	from { background-position: 0% 0; }
+	to { background-position: 100% 0; }
+}
+
+#arena[data-new-decade-style="dyon"] > .player::before,
+#arena[data-new-decade-style="dyon"] > .player::after {
+	left: 0 !important;
+	top: 0 !important;
+	width: 100% !important;
+	height: 100% !important;
+	background-size: 1000% 100% !important;
+	background-position: 0 0;
+}
+
+/* dyon 使用对应的 2400×270 精灵图，避免把静态边框图当动画图裁剪 */
+#arena[data-new-decade-style="dyon"] > .player::before {
+	background-image: url("../../image/ui/effects/sprites_glow_blue2.png") !important;
+}
+
+#arena[data-new-decade-style="dyon"] > .player::after,
+#arena[data-new-decade-style="dyon"] > .player.target:not(.glow_phase):not(.selectable):not(.selected)::after {
+	background-image: url("../../image/ui/effects/sprites_glow_red2.png") !important;
+}
+
+#arena[data-new-decade-style="dyon"] > .player.glow_phase:not(.selectable):not([data-position="0"])::before {
+	background-image: url("../../image/ui/effects/sprites_glow_orange2.png") !important;
+}
+
+#arena[data-new-decade-style="dyon"] > .player.selected::before,
+#arena[data-new-decade-style="dyon"] > .player.target::before {
+	opacity: 0 !important;
+}
+
+#arena[data-new-decade-style="dyon"] > .player.selected::after,
+#arena[data-new-decade-style="dyon"] > .player.target::after {
+	background-image: url("../../image/ui/effects/sprites_glow_red2.png") !important;
+	opacity: 1 !important;
+	animation: kf-dyon-glow 0.9s infinite steps(9, end) forwards !important;
+}
+
+#arena[data-new-decade-style="dyon"] > .player > .identity.guessing {
+	top: auto !important;
+	bottom: 20px !important;
+	left: -15px !important;
+	z-index: 99 !important;
+}
+
+/* 一号位与主玩家保持当前基准；其余玩家的身份牌稍微下移 */
+#arena[data-new-decade-style="dyon"] > .player:not([data-position="0"]):not([data-position="4"]) > .identity:not(.guessing) {
+	bottom: 20px !important;
+}
+
+/* dyon：限定技/转换技标志放到主玩家手牌右侧，不再叠在武将框上 */
+#arena[data-new-decade-style="dyon"] > .player[data-position="0"] .skillMarks {
+	position: absolute !important;
+	left: 22px !important;
+	right: auto !important;
+	top: auto !important;
+	bottom: -4px !important;
+	width: 64px !important;
+	height: 32px !important;
+	flex-direction: row !important;
+	justify-content: flex-start !important;
+	align-items: center !important;
+	overflow: visible !important;
+	z-index: 120 !important;
+}
+
+#arena[data-new-decade-style="dyon"] > .player[data-position="0"] .skillMarks > .skillMarkItem {
+	position: relative !important;
+	left: auto !important;
+	right: auto !important;
+	top: auto !important;
+	margin: 0 2px !important;
+}
+
+/** dyon 座位号：放在右下角血条上方 */
+#arena[data-new-decade-style="dyon"] > .player > .seat,
+#arena[data-new-decade-style="dyon"] > .player[data-position="0"] > .seat {
+	left: auto;
+	right: 13px;
+	bottom: 0;
+	width: 30px;
+	line-height: 18px;
+	font-size: 21px;
+	text-align: center;
+	z-index: 90;
+}
+
+/* 六人局：六个位置统一尺寸，目标接近参考白框。 */
+@media (min-width: 900px) and (min-height: 600px) {
+	#arena[data-new-decade-style="dyon"][data-number="6"] {
+		/* 六个座位共用一个响应式尺寸源：优先占竞技场宽度 30%，并受可用高度约束。 */
+		/* 1920×991 下约 544×306；安卓 2400×1080 下约 588×331，并为光效预留间距。 */
+		--six-player-width: min(calc(30vw - 14.1px), calc(59.259vh - 43.259px));
+		--six-player-height: min(calc(16.875vw - 7.931px), calc(33.333vh - 24.333px));
+		--six-player-row-gap: clamp(24px, 2.5vh, 28px);
+		--six-player-left-safe: max(6px, env(safe-area-inset-left, 0px));
+		--six-player-right-safe: max(6px, env(safe-area-inset-right, 0px));
+		--six-player-bottom-safe: max(0px, env(safe-area-inset-bottom, 0px));
+		/* 桌面竞技场从窗口顶部 10% 开始，以相同比例向上补偿，避免顶部留白。 */
+		--six-player-top: calc(-1 * clamp(75px, 9vh, 98px));
+	}
+
+	/* 安卓/触屏布局的竞技场本身已贴近顶部，不再使用桌面的负偏移。 */
+	#arena.phone[data-new-decade-style="dyon"][data-number="6"],
+	#arena.dui-mobile[data-new-decade-style="dyon"][data-number="6"] {
+		--six-player-width: min(calc(30vw - 14.1px), calc(56.889vh - 26.667px));
+		--six-player-height: min(calc(16.875vw - 7.931px), calc(32vh - 15px));
+		--six-player-top: max(0px, env(safe-area-inset-top, 0px));
+	}
+
+	#arena[data-new-decade-style="dyon"][data-number="6"] > .player {
+		--w: var(--six-player-width) !important;
+		width: var(--six-player-width) !important;
+		height: var(--six-player-height) !important;
+		min-width: var(--six-player-width) !important;
+		min-height: var(--six-player-height) !important;
+		max-width: var(--six-player-width) !important;
+		max-height: var(--six-player-height) !important;
+		box-sizing: border-box;
+		aspect-ratio: 16 / 9;
+	}
+
+	#arena[data-new-decade-style="dyon"][data-number="6"] > .player > .primary-avatar,
+	#arena[data-new-decade-style="dyon"][data-number="6"] > .player > .deputy-avatar,
+	#arena[data-new-decade-style="dyon"][data-number="6"] > .player > .dynamic-wrap {
+		height: 100% !important;
+		background-size: cover !important;
+	}
+
+	#arena[data-new-decade-style="dyon"][data-number="6"] > .player::before {
+		background-image: url("../../image/ui/effects/sprites_glow_blue.png") !important;
+	}
+	#arena[data-new-decade-style="dyon"][data-number="6"] > .player::after {
+		background-image: url("../../image/ui/effects/sprites_glow_red.png") !important;
+	}
+	#arena[data-new-decade-style="dyon"][data-number="6"] > .player.glow_phase:not(.selectable):not([data-position="0"])::before {
+		background-image: url("../../image/ui/effects/sprites_glow_orange.png") !important;
+	}
+
+	/* 旧版精灵图规则：蓝色=可选目标，橙黄色=当前角色，红色=已选目标。 */
+	#arena[data-new-decade-style="dyon"][data-number="6"] > .player.selectable:not(.selected):not(.target)::before {
+		background-image: url("../../image/ui/effects/sprites_glow_blue.png") !important;
+		opacity: 1 !important;
+		animation: kf-dyon-glow 0.9s infinite steps(9, end) forwards !important;
+	}
+	#arena[data-new-decade-style="dyon"][data-number="6"] > .player.glow_phase:not(.selectable)::before {
+		background-image: url("../../image/ui/effects/sprites_glow_orange.png") !important;
+		opacity: 1 !important;
+		animation: kf-dyon-glow 0.9s infinite steps(9, end) forwards !important;
+	}
+	#arena[data-new-decade-style="dyon"][data-number="6"] > .player.selected::after,
+	#arena[data-new-decade-style="dyon"][data-number="6"] > .player.target::after {
+		background-image: url("../../image/ui/effects/sprites_glow_red.png") !important;
+		opacity: 1 !important;
+		animation: kf-dyon-glow 0.9s infinite steps(9, end) forwards !important;
+	}
+
+	/* 旧版通用状态兼容：有些牌局不会带 data-number，温柔一刀还会使用 Qselectable。 */
+	#arena[data-new-decade-style="dyon"] > .player.selectable:not(.selected):not(.target)::before,
+	#arena[data-new-decade-style="dyon"] > .player.Qselectable::before {
+		background-image: url("../../image/ui/effects/sprites_glow_blue.png") !important;
+		opacity: 1 !important;
+		animation: kf-dyon-glow 0.9s infinite steps(9, end) forwards !important;
+	}
+	#arena[data-new-decade-style="dyon"] > .player.glow_phase:not(.selectable):not([data-position="0"])::before,
+	#arena[data-new-decade-style="dyon"] > .player.dyon-phase-glow:not(.selectable):not(.selected)::before {
+		background-image: url("../../image/ui/effects/sprites_glow_orange.png") !important;
+		opacity: 1 !important;
+		animation: kf-dyon-glow 0.9s infinite steps(9, end) forwards !important;
+	}
+	/* 当前回合标记优先级最高，避免同时带 selectable/selected 时被蓝光覆盖。 */
+	#arena[data-new-decade-style="dyon"] > .player.dyon-phase-glow:not(.selected):not(.target)::before {
+		background-image: url("../../image/ui/effects/sprites_glow_orange.png") !important;
+		opacity: 1 !important;
+		animation: kf-dyon-glow 0.9s infinite steps(9, end) forwards !important;
+	}
+	#arena[data-new-decade-style="dyon"] > .player.selected::before,
+	#arena[data-new-decade-style="dyon"] > .player.target::before {
+		opacity: 0 !important;
+	}
+	#arena[data-new-decade-style="dyon"] > .player.selectable:not(.selected):not(.target),
+	#arena[data-new-decade-style="dyon"] > .player.Qselectable {
+		box-shadow: rgba(0, 0, 0, 0.3) 0 0 0 2px, rgb(16, 33, 217) 0 0 10px 5px, rgb(16, 33, 217) 0 0 20px 10px !important;
+	}
+	#arena[data-new-decade-style="dyon"] > .player.dyon-phase-glow:not(.selected):not(.target) {
+		box-shadow: rgba(0, 0, 0, 0.3) 0 0 0 2px, rgb(239, 152, 28) 0 0 10px 5px, rgb(239, 152, 28) 0 0 20px 10px !important;
+	}
+	#arena[data-new-decade-style="dyon"] > .player.selected,
+	#arena[data-new-decade-style="dyon"] > .player.target {
+		box-shadow: rgba(0, 0, 0, 0.3) 0 0 0 2px, rgb(218, 34, 34) 0 0 10px 5px, rgb(218, 34, 34) 0 0 20px 10px !important;
+	}
+	#arena[data-new-decade-style="dyon"][data-number="6"] > .player > .died-identity {
+		right: 24px;
+		bottom: 15px !important;
+		z-index: 120 !important;
+	}
+
+	/* 只保留一个后台工具按钮；兼容旧脚本残留的重复节点。 */
+	#arena > .settingButton ~ .settingButton {
+		display: none !important;
+	}
+}
