@@ -39,7 +39,7 @@ export function createShizhounianLbtnPlugin(lib, game, ui, get, ai, _status, app
 		initArenaReady() {
 			const self = this;
 			const setupScrollableArenaLog = () => {
-				if (lib.config.extension_十周年UI_newDecadeStyle !== "dyon") return;
+				if (lib.config.extension_十周年UI_newDecadeStyle !== "horizontal") return;
 				if (game.log?._decadeUIKeepArenaLog !== 2) {
 					const originalLog = game.log?._decadeUIOriginal || game.log;
 					const wrappedLog = function (...args) {
@@ -98,26 +98,26 @@ export function createShizhounianLbtnPlugin(lib, game, ui, get, ai, _status, app
 				ui.arena._decadeUIDedupeSettingButtons = new MutationObserver(dedupeSettingButtons);
 				ui.arena._decadeUIDedupeSettingButtons.observe(ui.arena, { childList: true, subtree: true });
 			}
-			const syncDyonPhaseGlow = () => {
-				if (lib.config.extension_十周年UI_newDecadeStyle !== "dyon" || !ui.arena) return;
+			const syncHorizontalPhaseGlow = () => {
+				if (lib.config.extension_十周年UI_newDecadeStyle !== "horizontal" || !ui.arena) return;
 				const phase = _status.currentPhase || game.currentPhase;
-				ui.arena.querySelectorAll(".player.dyon-phase-glow").forEach(player => {
-					if (player !== phase) player.classList.remove("dyon-phase-glow");
+				ui.arena.querySelectorAll(".player.horizontal-phase-glow").forEach(player => {
+					if (player !== phase) player.classList.remove("horizontal-phase-glow");
 				});
-				if (phase?.parentNode === ui.arena) phase.classList.add("dyon-phase-glow");
+				if (phase?.parentNode === ui.arena) phase.classList.add("horizontal-phase-glow");
 			};
-			if (ui.arena && !ui.arena._decadeUIDyonPhaseGlowTimer) {
-				ui.arena._decadeUIDyonPhaseGlowTimer = setInterval(syncDyonPhaseGlow, 250);
+			if (ui.arena && !ui.arena._decadeUIHorizontalPhaseGlowTimer) {
+				ui.arena._decadeUIHorizontalPhaseGlowTimer = setInterval(syncHorizontalPhaseGlow, 250);
 				lib.onover?.push?.(() => {
-					clearInterval(ui.arena._decadeUIDyonPhaseGlowTimer);
-					delete ui.arena._decadeUIDyonPhaseGlowTimer;
+					clearInterval(ui.arena._decadeUIHorizontalPhaseGlowTimer);
+					delete ui.arena._decadeUIHorizontalPhaseGlowTimer;
 				});
 			}
 			lib.arenaReady.push(() => {
 				setupScrollableArenaLog();
 				dedupeSettingButtons();
-				if (!ui.arena?._decadeUIDyonPhaseGlowTimer && ui.arena) {
-					ui.arena._decadeUIDyonPhaseGlowTimer = setInterval(syncDyonPhaseGlow, 250);
+				if (!ui.arena?._decadeUIHorizontalPhaseGlowTimer && ui.arena) {
+					ui.arena._decadeUIHorizontalPhaseGlowTimer = setInterval(syncHorizontalPhaseGlow, 250);
 				}
 				self.initRoundUpdate();
 

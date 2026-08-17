@@ -288,7 +288,7 @@ function getDeathImageUrl(style, identity, player) {
 		codename: `codename/dead_${identity}.png`,
 		on: `decade/dead_${identity}.png`,
 		othersOff: `decade/dead_${identity}.png`,
-		dyon: `decade/dead_${identity}.png`,
+		horizontal: `decade/dead_${identity}.png`,
 	};
 
 	if (styleMap[style]) {

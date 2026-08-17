@@ -10,7 +10,7 @@ export const STYLE_TO_SKIN = {
 	onlineUI: "online",
 	babysha: "baby",
 	codename: "codename",
-	dyon: "dyon",
+	horizontal: "horizontal",
 };
 
 /** 默认样式 */

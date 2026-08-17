@@ -52,7 +52,7 @@ const removeElementById = id => document.getElementById(id)?.remove();
  */
 const isShoushaSyle = () => {
 	const style = lib.config.extension_十周年UI_newDecadeStyle;
-	return style !== "on" && style !== "othersOff" && style !== "dyon";
+	return style !== "on" && style !== "othersOff" && style !== "horizontal";
 };
 
 /**

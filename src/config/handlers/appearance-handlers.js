@@ -47,7 +47,7 @@ export function onNewDecadeStyleUpdate() {
 	if (!window.decadeUI) return;
 	const style = lib.config.extension_十周年UI_newDecadeStyle;
 	ui.arena.dataset.newDecadeStyle = style;
-	const decadeLayoutStyles = ["on", "othersOff", "onlineUI", "babysha", "codename", "dyon"];
+	const decadeLayoutStyles = ["on", "othersOff", "onlineUI", "babysha", "codename", "horizontal"];
 	ui.arena.dataset.decadeLayout = decadeLayoutStyles.includes(style) ? "on" : "off";
 }
 

@@ -1067,7 +1067,7 @@ function installStyle() {
 		#arena.dui-normal-multiplayer-layout > #roundmenu.roundarenabutton {
 			display: none !important;
 		}
-		#arena.dui-normal-multiplayer-layout[data-new-decade-style="dyon"] > .player > .chain {
+		#arena.dui-normal-multiplayer-layout[data-new-decade-style="horizontal"] > .player > .chain {
 			top: 84% !important;
 		}
 		.dui-layout-auxiliary-overlay {
