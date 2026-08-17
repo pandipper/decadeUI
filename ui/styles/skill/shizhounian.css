@@ -343,8 +343,8 @@
 	-webkit-filter: grayscale(100%);
 }
 
-/* dyon：主玩家的限定技/转换技标记固定放在手牌右侧 */
-body[data-style="dyon"] #arena > .player > .skillMarks {
+/* horizontal：主玩家的限定技/转换技标记固定放在手牌右侧 */
+body[data-style="horizontal"] #arena > .player > .skillMarks {
 	position: absolute !important;
 	left: 22px !important;
 	right: auto !important;
@@ -360,7 +360,7 @@ body[data-style="dyon"] #arena > .player > .skillMarks {
 	z-index: 120 !important;
 }
 
-body[data-style="dyon"] #arena > .player > .skillMarks > .skillMarkItem {
+body[data-style="horizontal"] #arena > .player > .skillMarks > .skillMarkItem {
 	position: relative !important;
 	left: auto !important;
 	right: auto !important;
@@ -368,11 +368,11 @@ body[data-style="dyon"] #arena > .player > .skillMarks > .skillMarkItem {
 	margin: 0 !important;
 }
 
-body[data-style="dyon"] #arena > .player > .skillMarks > .skillMarkItem.xiandingji {
+body[data-style="horizontal"] #arena > .player > .skillMarks > .skillMarkItem.xiandingji {
 	order: 1;
 }
 
-body[data-style="dyon"] #arena > .player > .skillMarks > .skillMarkItem.zhuanhuanji {
+body[data-style="horizontal"] #arena > .player > .skillMarks > .skillMarkItem.zhuanhuanji {
 	order: 2;
 }
 

@@ -132,8 +132,8 @@ body > .background {
 		0 0 1px black;
 }
 
-/* dyon：计时器固定在窗口最上沿，避免被玩家区域挤下去 */
-#window[data-new-decade-style="dyon"] > #time {
+/* horizontal：计时器固定在窗口最上沿，避免被玩家区域挤下去 */
+#window[data-new-decade-style="horizontal"] > #time {
 	top: 4px !important;
 	z-index: 30;
 }
@@ -163,9 +163,9 @@ body > .background {
 	bottom: 0;
 }
 
-/* dyon 旧版手牌区高度，配合左下手牌布局 */
-#arena[data-new-decade-style="dyon"] > .hand-wrap,
-#arena[data-new-decade-style="dyon"] > .hand-back {
+/* horizontal 旧版手牌区高度，配合左下手牌布局 */
+#arena[data-new-decade-style="horizontal"] > .hand-wrap,
+#arena[data-new-decade-style="horizontal"] > .hand-back {
 	height: 170px;
 }
 

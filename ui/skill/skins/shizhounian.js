@@ -72,8 +72,8 @@ export function createShizhounianSkillPlugin(lib, game, ui, get, ai, _status, ap
 				skillControl: clear => {
 					if (!ui.skillControl) {
 						const isRight = lib.config["extension_十周年UI_rightLayout"] === "on";
-						const isDyon = lib.config.extension_十周年UI_newDecadeStyle === "dyon";
-						const cls = isDyon || isRight ? ".skill-control" : ".skill-controlzuoshou";
+						const isHorizontal = lib.config.extension_十周年UI_newDecadeStyle === "horizontal";
+						const cls = isHorizontal || isRight ? ".skill-control" : ".skill-controlzuoshou";
 						/* 角色本体技能固定归属竞技场左侧，不再跟随确认栏。 */
 						const node = ui.create.div(cls, ui.arena);
 						node.node = {
