@@ -269,7 +269,7 @@ export const prefixMarkModule = {
 	 * 检查是否启用前缀标记功能
 	 * @returns {boolean} 是否启用
 	 */
-	shouldShowPrefixMark: () => ["on", "dyon"].includes(lib.config?.[CONFIG_KEY]),
+	shouldShowPrefixMark: () => ["on", "horizontal"].includes(lib.config?.[CONFIG_KEY]),
 
 	/**
 	 * 获取武将对应的前缀配置

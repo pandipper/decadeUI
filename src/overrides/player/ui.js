@@ -39,7 +39,7 @@ export function playerSay(str) {
 			this.$chatImage.style.pointerEvents = "none";
 
 			const style = decadeUI.config.newDecadeStyle;
-			if (style === "off" || style === "on" || style === "othersOff" || style === "dyon") {
+			if (style === "off" || style === "on" || style === "othersOff" || style === "horizontal") {
 				this.$chatImage.style.left = "50%";
 				this.$chatImage.style.top = "50%";
 				this.$chatImage.style.transform = "translate(-50%, -50%)";

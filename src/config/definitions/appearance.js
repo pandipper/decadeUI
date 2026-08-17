@@ -62,7 +62,7 @@ export const newDecadeStyle = {
 		onlineUI: "online",
 		babysha: "欢乐三国杀",
 		codename: "名将杀",
-		dyon: "动皮布局",
+		horizontal: "横向布局",
 	},
 	onclick: onNewDecadeStyleClick,
 	update: onNewDecadeStyleUpdate,

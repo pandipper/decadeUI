@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [main, dyon]
+    branches: [main, horizontal]
   pull_request:
-    branches: [main, dyon]
+    branches: [main, horizontal]
 
 jobs:
   build:
