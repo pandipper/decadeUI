@@ -5,11 +5,6 @@
  * 将个人调整保留在 ui/styles/lbtn/dyon.css 中。
  */
 import { createShizhounianLbtnPlugin } from "./shizhounian.js";
+import { inheritSkin } from "../../skins/skinFactory.js";
 
-export function createDyonLbtnPlugin(lib, game, ui, get, ai, _status, app) {
-	const plugin = createShizhounianLbtnPlugin(lib, game, ui, get, ai, _status, app);
-	return {
-		...plugin,
-		skinName: "dyon",
-	};
-}
+export const createDyonLbtnPlugin = inheritSkin(createShizhounianLbtnPlugin, "dyon");
