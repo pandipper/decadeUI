@@ -184,6 +184,43 @@ export const playerDieEffect = {
 export const outward_title_end = createCollapseEnd("outward_title");
 
 /**
+ * 布局编辑器开关（进入 / 退出普通牌局布局编辑）
+ * @type {Object}
+ */
+export const visualLayoutEditor = {
+	clear: true,
+	name: '<ins>进入/退出普通牌局布局编辑</ins>',
+	intro: '拖动完整角色单元；拖动右下角统一缩放。每次松手都会自动记忆，特殊模式不处理。',
+	onclick: function () {
+		const editor = window.decadeUILayoutEditor;
+		if (!editor) {
+			alert('十周年UI布局编辑器尚未加载，请确认十周年UI已经启用。');
+			return;
+		}
+		editor.toggle();
+	},
+};
+
+/**
+ * 布局编辑器重置（恢复当前牌局默认布局）
+ * @type {Object}
+ */
+export const resetVisualLayout = {
+	clear: true,
+	name: '<ins>恢复当前牌局默认布局</ins>',
+	intro: '只清除当前模式、人数、十周年UI样式及桌面/触屏方向对应的布局记忆。',
+	onclick: function () {
+		const editor = window.decadeUILayoutEditor;
+		if (!editor || !ui.arena || !game.players?.length) {
+			alert('请先进入一局普通模式游戏，再恢复当前布局。');
+			return;
+		}
+		editor.reset();
+		alert('当前布局已恢复为默认值。');
+	},
+};
+
+/**
  * 整体外观配置集合
  * @type {Object}
  */
@@ -202,5 +239,7 @@ export const appearanceConfigs = {
 	dynamicSkinOutcrop,
 	killEffect,
 	playerDieEffect,
+	visualLayoutEditor,
+	resetVisualLayout,
 	outward_title_end,
 };
