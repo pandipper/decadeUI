@@ -8,7 +8,12 @@ export default defineConfig(({ mode }) => ({
 	plugins: [
 		viteStaticCopy({
 			targets: [
-				{ src: "src/libs", dest: "src" },
+				// 生产构建剥离 eruda 调试器：仅拷贝 spine.js（WebGL 骨骼引擎，运行时必需），
+				// 不再随产物分发 eruda.js（790KB 调试工具，默认关闭且仅开发期有用）。
+				// 开发模式(mode=development)保持原样拷贝整个 src/libs（含 eruda）以便调试。
+				...(mode === "production"
+					? [{ src: "src/libs/spine.js", dest: "src/libs" }]
+					: [{ src: "src/libs", dest: "src" }]),
 				{ src: "src/styles", dest: "src" },
 				{ src: "src/config/*.css", dest: "src/config" },
 				{ src: "src/features/*.css", dest: "src/features" },
