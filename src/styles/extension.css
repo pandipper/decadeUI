@@ -169,3 +169,8 @@
 	background-size: 100% 100%;
 	z-index: 999;
 }
+
+/* 技能描述关键词高亮（时机 / 频率），颜色沿用本体 phase 档位的橙色 */
+.decade-skill-hl {
+	color: rgb(245, 145, 5);
+}

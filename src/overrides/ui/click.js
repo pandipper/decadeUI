@@ -5,7 +5,7 @@
  */
 
 import { lib, game, ui, get, _status } from "noname";
-import { getBaseUiClickIntro } from "./base.js";
+import { getBaseUiClickIntro, getBaseUiClickCharactercard } from "./base.js";
 
 /**
  * 卡牌点击处理
@@ -425,4 +425,40 @@ export function uiClickVolumn() {
 	setting.add(ui.create.div(".placeholder"));
 
 	return setting;
+}
+
+/**
+ * 武将名片点击处理
+ * @description 包住本体实现；开启「双击角色看技能」时，名片创建后自动切到「技能」页。
+ * 本体的视图切换函数 applyViewMode 是局部函数，外部无法直接调用，因此只能模拟点击
+ * 「技能」按钮。任何异常都静默处理，不得影响本体行为。
+ * @param {...*} args - 透传给本体 ui.click.charactercard 的参数
+ * @returns {*} 本体返回值
+ */
+export function uiClickCharactercard(...args) {
+	const original = getBaseUiClickCharactercard();
+	if (typeof original !== "function") return undefined;
+
+	// 记录调用前已存在的按钮，用于识别本次新建的名片
+	const known = new Set(document.querySelectorAll(".skillButton"));
+	const result = original.apply(this, args);
+
+	const switchToSkill = () => {
+		if (lib.config.extension_十周年UI_doubleClickSkill === false) return;
+
+		const target = Array.from(document.querySelectorAll(".skillButton")).find(btn => !known.has(btn));
+		if (!target || !document.contains(target)) return;
+
+		target.click();
+	};
+
+	try {
+		switchToSkill();
+		// 兜底：本体若在下一帧才应用默认视图，再切一次（重复切换是幂等的）
+		requestAnimationFrame(switchToSkill);
+	} catch (e) {
+		// 静默失败：特性异常不得影响本体行为
+	}
+
+	return result;
 }

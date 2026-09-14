@@ -4,6 +4,7 @@
  */
 
 import { lib, ui, get } from "noname";
+import { highlightSkillDescription } from "./skillDescHighlight.js";
 
 /**
  * 技能按钮悬浮提示类
@@ -187,6 +188,8 @@ export class SkillButtonTooltip {
 		text = this.addLineBreakAfterLastRegularNumber(text);
 		text = this.addLineBreaksBeforeYinYang(text);
 		text = this.addLineBreakAfterLastYinYang(text);
+
+		text = highlightSkillDescription(text);
 
 		text = this.restoreBrackets(text, brackets);
 
