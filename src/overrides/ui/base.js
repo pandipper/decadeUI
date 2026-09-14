@@ -12,6 +12,9 @@ let baseUiUpdate = null;
 /** @type {Function|null} 基础介绍点击方法 */
 let baseUiClickIntro = null;
 
+/** @type {Function|null} 基础武将名片点击方法 */
+let baseUiClickCharactercard = null;
+
 /** @type {Function|null} 基础arena方法引用 */
 let baseUiCreateArena = null;
 
@@ -31,6 +34,7 @@ let baseUiCreateButton = null;
 export function setBaseUiMethods(base) {
 	baseUiUpdate = base.update;
 	baseUiClickIntro = base.click?.intro;
+	baseUiClickCharactercard = base.click?.charactercard;
 }
 
 /**
@@ -58,6 +62,14 @@ export function getBaseUiUpdate() {
  */
 export function getBaseUiClickIntro() {
 	return baseUiClickIntro;
+}
+
+/**
+ * 获取基础武将名片点击方法
+ * @returns {Function|null}
+ */
+export function getBaseUiClickCharactercard() {
+	return baseUiClickCharactercard;
 }
 
 /**

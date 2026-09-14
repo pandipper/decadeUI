@@ -37,7 +37,7 @@ import { applyMoveAnimFix } from "../overrides/moveAnimFix.js";
 
 import { registerDecadeUIHooks, playerAwakenSkill, playerSetIdentity, playerGetState, playerMarkSkill, playerUnmarkSkill, playerReinitCharacter, playerSetSeatNum, playerUninit, playerReinit, playerUpdate, playerUseCard, playerRespond, playerLose, playerUseCardAnimateBefore, playerRespondAnimateBefore, playerChangeZhuanhuanji, playerSetModeState, playerHandleEquipChange, playerMark, playerMarkCharacter, playerUpdateMark, playerMarkSkillCharacter, playerPlayDynamic, playerStopDynamic, playerApplyDynamicSkin, playerSay, playerDieAfter, playerSkill, playerSyncExpand, playerSetSkillYinYang, player$SetSkillYinYang, playerSetSkillState, player$SetSkillState, playerDamagepop, playerCompare, playerCompareMultiple, playerCheckAndAddExperienceSuffix, playerQueueCssAnimation, playerDamage, playerUpdateShowCards, playerCheckBoundsCache, playerLine, playerPhaseJudge, playerGain2, playerDraw, playerGive, playerThrow, playerThrowordered2, playerAddVirtualJudge, playerDirectgain, playerDirectgains } from "../overrides/player.js";
 
-import { uiUpdatec, uiUpdatehl, uiUpdatej, uiUpdatem, uiUpdatez, uiUpdate, uiUpdatejm, uiUpdatexr, uiCreatePrebutton, uiCreateRarity, uiCreateButton, uiCreateControl, uiCreateDialog, uiCreateSelectlist, uiCreateIdentityCard, uiCreateSpinningIdentityCard, uiCreateArena, uiCreatePause, uiCreateCharacterDialog, uiClickCard, uiClickIntro } from "../overrides/ui.js";
+import { uiUpdatec, uiUpdatehl, uiUpdatej, uiUpdatem, uiUpdatez, uiUpdate, uiUpdatejm, uiUpdatexr, uiCreatePrebutton, uiCreateRarity, uiCreateButton, uiCreateControl, uiCreateDialog, uiCreateSelectlist, uiCreateIdentityCard, uiCreateSpinningIdentityCard, uiCreateArena, uiCreatePause, uiCreateCharacterDialog, uiClickCard, uiClickIntro, uiClickCharactercard } from "../overrides/ui.js";
 
 /**
  * 创建decadeUI核心对象
@@ -88,7 +88,7 @@ export const createDecadeUIObject = () => ({
 					pause: ui.create.pause,
 					characterDialog: ui.create.characterDialog,
 				},
-				click: { intro: ui.click.intro },
+				click: { intro: ui.click.intro, charactercard: ui.click.charactercard },
 				update: ui.update,
 			},
 			lib: {
@@ -229,7 +229,7 @@ export const createDecadeUIObject = () => ({
 					characterDialog: uiCreateCharacterDialog,
 					buttonPresets: { character: createCharacterButtonPreset() },
 				},
-				click: { card: uiClickCard, intro: uiClickIntro },
+				click: { card: uiClickCard, intro: uiClickIntro, charactercard: uiClickCharactercard },
 			},
 			game: {
 				logv: gameLogv,

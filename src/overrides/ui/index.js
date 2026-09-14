@@ -27,7 +27,7 @@ export {
 } from "./create.js";
 
 // ui.click
-export { uiClickCard, uiClickIntro, uiClickIdentity, uiClickVolumn } from "./click.js";
+export { uiClickCard, uiClickIntro, uiClickIdentity, uiClickVolumn, uiClickCharactercard } from "./click.js";
 
 // 其他方法
 export { uiClear } from "./misc.js";

@@ -93,6 +93,26 @@ export const enableEquipCopy = {
 };
 
 /**
+ * 双击角色看技能配置
+ * @type {Object}
+ */
+export const doubleClickSkill = {
+	name: "双击角色看技能而非介绍",
+	init: true,
+	intro: "开启后，双击武将打开的名片会默认切到「技能」页，而不是「简介」页；找不到技能按钮时会保持本体默认行为",
+};
+
+/**
+ * 技能描述高亮配置
+ * @type {Object}
+ */
+export const skillDescHighlight = {
+	name: "技能描述高亮",
+	init: true,
+	intro: "开启后，技能描述里的时机与频率关键词（如「出牌阶段」「每回合限一次」「受到伤害后」）会以橙色标出",
+};
+
+/**
  * 自由选将筛选框配置
  * @type {Object}
  */
@@ -141,6 +161,8 @@ export const miscConfigs = {
 	mx_decade_characterDialog,
 	enableRecastInteraction,
 	enableEquipCopy,
+	doubleClickSkill,
+	skillDescHighlight,
 	rightLayout,
 	stuff_title_end,
 };
