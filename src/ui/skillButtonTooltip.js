@@ -116,7 +116,7 @@ export class SkillButtonTooltip {
 				if (skillInfo.prompt) {
 					if (typeof skillInfo.prompt === "function") {
 						try {
-							const promptResult = skillInfo.prompt(player, skillName);
+							const promptResult = skillInfo.prompt(get.event(), player);
 							if (typeof promptResult === "string" && promptResult) {
 								str = promptResult;
 							}
