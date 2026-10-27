@@ -3,7 +3,15 @@
  * @description 提供独立的配置界面，包含外观、卡牌、部件、其他四大类设置
  */
 import { lib, game, ui } from "noname";
-import { config } from "./index.js";
+import { config, horizontalConfigs } from "./index.js";
+
+/**
+ * 配置定义查找表
+ * @description 主表 + 仅配置窗口可见的布局专属配置（horizontalConfigs 不进 config 主表，
+ * 因此不会出现在本体的全局设置面板里）。
+ * @type {Object}
+ */
+const configDefs = { ...config, ...horizontalConfigs };
 
 let currentOverlay = null;
 let lastActiveTab = "appearance";
@@ -94,6 +102,43 @@ function createConfigWindow() {
 }
 
 /**
+ * 按当前布局过滤配置项
+ * @description 带 `layouts` 字段的配置项只在命中当前布局时显示；未声明 `layouts`
+ * 的项视为全布局可见。分组标题若其下所有项都被过滤掉，则标题本身也不显示，
+ * 避免出现空分组。
+ * @param {Array} items - 原始配置项数组
+ * @returns {Array} 过滤后的配置项数组
+ */
+function filterConfigsByLayout(items) {
+	const style = lib.config.extension_十周年UI_newDecadeStyle;
+	const result = [];
+
+	/** @type {Object|null} 尚未确认是否输出的分组标题 */
+	let pendingTitle = null;
+	/** @type {boolean} 当前分组标题是否已输出 */
+	let titlePushed = false;
+
+	for (const item of items) {
+		if (item.isTitle) {
+			pendingTitle = item;
+			titlePushed = false;
+			continue;
+		}
+
+		if (item.layouts && !item.layouts.includes(style)) continue;
+
+		if (pendingTitle && !titlePushed) {
+			result.push(pendingTitle);
+			titlePushed = true;
+		}
+
+		result.push(item);
+	}
+
+	return result;
+}
+
+/**
  * 加载指定标签页的配置项
  * @param {HTMLElement} container - 内容容器元素
  * @param {string} tabId - 标签页ID
@@ -102,7 +147,7 @@ function createConfigWindow() {
 function loadConfigs(container, tabId) {
 	container.innerHTML = "";
 	container.scrollTop = 0;
-	const configs = getConfigsByTab(tabId);
+	const configs = filterConfigsByLayout(getConfigsByTab(tabId));
 
 	configs.forEach(configItem => {
 		if (configItem.isTitle) {
@@ -112,7 +157,7 @@ function loadConfigs(container, tabId) {
 		}
 
 		const configKey = `extension_十周年UI_${configItem.key}`;
-		const configDef = config[configItem.key];
+		const configDef = configDefs[configItem.key];
 		if (!configDef) return;
 
 		const item = ui.create.div(".decade-config-item", container);
@@ -271,7 +316,9 @@ function loadConfigs(container, tabId) {
  * 获取指定标签页的配置项列表
  * @param {string} tabId - 标签页ID (appearance/card/component/misc)
  * @returns {Array} 配置项数组
- * @description 返回包含配置项定义的数组，每项包含key、name、type等属性
+ * @description 返回包含配置项定义的数组，每项包含key、name、type等属性。
+ * 可选 `layouts: string[]` 声明该配置项仅在指定布局下显示（如 ["horizontal"]），
+ * 未声明则全布局可见；过滤由 filterConfigsByLayout 完成。
  */
 function getConfigsByTab(tabId) {
 	const configMap = {
@@ -335,6 +382,10 @@ function getConfigsByTab(tabId) {
 			{ key: "mx_decade_characterDialog", name: "自由选将筛选框", type: "select" },
 			{ key: "rightLayout", name: "左右布局", type: "select" },
 			{ key: "eruda", name: "调试助手", type: "toggle" },
+			// 以下两项仅在 horizontal 布局下显示（layouts 由 filterConfigsByLayout 过滤）
+			{ isTitle: true, name: "武将信息" },
+			{ key: "doubleClickSkill", name: "双击角色看技能而非介绍", type: "toggle", layouts: ["horizontal"] },
+			{ key: "skillDescHighlight", name: "技能描述高亮", type: "toggle", layouts: ["horizontal"] },
 		],
 	};
 

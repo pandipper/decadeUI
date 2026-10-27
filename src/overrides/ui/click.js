@@ -429,6 +429,15 @@ export function uiClickVolumn() {
 }
 
 /**
+ * 判断「双击角色看技能」是否生效
+ * @description 双重门控：必须是 horizontal 布局，且用户未在配置窗口里关闭（缺省开启）。
+ * @returns {boolean} 是否生效
+ */
+function isDoubleClickSkillEnabled() {
+	return isHorizontalStyle() && lib.config.extension_十周年UI_doubleClickSkill !== false;
+}
+
+/**
  * 武将名片点击处理（horizontal 专属）
  * @description 包住本体实现；horizontal 布局下，名片创建后自动切到「技能」页。
  * 本体的视图切换函数 applyViewMode 是局部函数，外部无法直接调用，因此只能模拟点击
@@ -443,15 +452,15 @@ export function uiClickCharactercard(...args) {
 	const original = getBaseUiClickCharactercard();
 	if (typeof original !== "function") return undefined;
 
-	// 非 horizontal 布局：完全等价于本体实现
-	if (!isHorizontalStyle()) return original.apply(this, args);
+	// 未生效（非 horizontal 布局，或 horizontal 下用户关闭了开关）：完全等价于本体实现
+	if (!isDoubleClickSkillEnabled()) return original.apply(this, args);
 
 	// 记录调用前已存在的按钮，用于识别本次新建的名片
 	const known = new Set(document.querySelectorAll(".skillButton"));
 	const result = original.apply(this, args);
 
 	const switchToSkill = () => {
-		if (!isHorizontalStyle()) return;
+		if (!isDoubleClickSkillEnabled()) return;
 
 		const target = Array.from(document.querySelectorAll(".skillButton")).find(btn => !known.has(btn));
 		if (!target || !document.contains(target)) return;

@@ -3,11 +3,15 @@
  * @description 在技能描述的加工管线中，为「时机」与「频率」类关键词上色。
  * 词表按 A 阶段 / B 回合 / C 结算 / D 频率 四组组织，全部以正则表达。
  *
- * 作用域：仅在 horizontal 布局下生效。其它布局（手杀UI、OL 等）调用时原样返回，
- * 不产生任何 DOM 改动，也不提供全局配置开关。
+ * 作用域：仅在 horizontal 布局下生效，开关也只在该布局的配置窗口里出现。
+ * 其它布局（手杀UI、OL 等）调用时原样返回，不产生任何 DOM 改动。
  * @module ui/skillDescHighlight
  */
+import { lib } from "noname";
 import { isHorizontalStyle } from "../utils/core.js";
+
+/** 配置键（不含 extension_十周年UI_ 前缀） */
+const CONFIG_KEY = "skillDescHighlight";
 
 /** 关键词外层标签的类名，颜色定义见 src/styles/extension.css（限定在 horizontal 布局） */
 const HL_CLASS = "decade-skill-hl";
@@ -58,6 +62,15 @@ const KEYWORD_RE = new RegExp(
 );
 
 /**
+ * 判断技能描述高亮是否生效
+ * @description 双重门控：必须是 horizontal 布局，且用户未在配置窗口里关闭（缺省开启）。
+ * @returns {boolean} 是否生效
+ */
+function isEnabled() {
+	return isHorizontalStyle() && lib.config[`extension_十周年UI_${CONFIG_KEY}`] !== false;
+}
+
+/**
  * 为一段纯文本打上关键词标签
  * @param {string} text - 不含 HTML 标签的文本
  * @returns {string} 已插入 <span> 的文本
@@ -79,7 +92,7 @@ function markKeywords(text) {
  * @returns {string} 处理后的描述
  */
 export function highlightSkillDescription(text) {
-	if (!text || !isHorizontalStyle()) return text;
+	if (!text || !isEnabled()) return text;
 
 	return text.replace(/(<[^>]*>)|([^<]+)/g, (match, tag, plain) => {
 		if (tag) return tag;
