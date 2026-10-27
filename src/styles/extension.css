@@ -170,7 +170,9 @@
 	z-index: 999;
 }
 
-/* 技能描述关键词高亮（时机 / 频率），颜色沿用本体 phase 档位的橙色 */
-.decade-skill-hl {
+/* 技能描述关键词高亮（时机 / 频率），颜色沿用本体 phase 档位的橙色
+   仅 horizontal 布局生效：其它布局不会生成该 class，这里再用 data-style 兜一层，
+   确保任何情况下都不会染到 手杀UI / OL 等布局的技能描述。 */
+body[data-style="horizontal"] .decade-skill-hl {
 	color: rgb(245, 145, 5);
 }

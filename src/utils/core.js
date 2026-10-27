@@ -14,6 +14,16 @@ export function isMobile() {
 }
 
 /**
+ * 判断当前是否处于 horizontal（横向）布局
+ * @description 仅供 horizontal 专属特性做作用域判定使用。
+ * 返回 false 时调用方必须完全走本体/上游原有逻辑，不得改变其它布局（手杀UI、OL 等）的行为。
+ * @returns {boolean} 是否为 horizontal 布局
+ */
+export function isHorizontalStyle() {
+	return lib.config.extension_十周年UI_newDecadeStyle === "horizontal";
+}
+
+/**
  * 获取指定范围内的随机整数
  * @param {number} [min=-2147483648] - 最小值
  * @param {number} [max=2147483648] - 最大值

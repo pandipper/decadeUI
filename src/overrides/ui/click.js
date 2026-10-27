@@ -6,6 +6,7 @@
 
 import { lib, game, ui, get, _status } from "noname";
 import { getBaseUiClickIntro, getBaseUiClickCharactercard } from "./base.js";
+import { isHorizontalStyle } from "../../utils/core.js";
 
 /**
  * 卡牌点击处理
@@ -428,10 +429,13 @@ export function uiClickVolumn() {
 }
 
 /**
- * 武将名片点击处理
- * @description 包住本体实现；开启「双击角色看技能」时，名片创建后自动切到「技能」页。
+ * 武将名片点击处理（horizontal 专属）
+ * @description 包住本体实现；horizontal 布局下，名片创建后自动切到「技能」页。
  * 本体的视图切换函数 applyViewMode 是局部函数，外部无法直接调用，因此只能模拟点击
  * 「技能」按钮。任何异常都静默处理，不得影响本体行为。
+ *
+ * 非 horizontal 布局（手杀UI、OL 等）在入口处直接透传本体实现，不记录节点、
+ * 不注册 rAF、不产生任何额外副作用。
  * @param {...*} args - 透传给本体 ui.click.charactercard 的参数
  * @returns {*} 本体返回值
  */
@@ -439,12 +443,15 @@ export function uiClickCharactercard(...args) {
 	const original = getBaseUiClickCharactercard();
 	if (typeof original !== "function") return undefined;
 
+	// 非 horizontal 布局：完全等价于本体实现
+	if (!isHorizontalStyle()) return original.apply(this, args);
+
 	// 记录调用前已存在的按钮，用于识别本次新建的名片
 	const known = new Set(document.querySelectorAll(".skillButton"));
 	const result = original.apply(this, args);
 
 	const switchToSkill = () => {
-		if (lib.config.extension_十周年UI_doubleClickSkill === false) return;
+		if (!isHorizontalStyle()) return;
 
 		const target = Array.from(document.querySelectorAll(".skillButton")).find(btn => !known.has(btn));
 		if (!target || !document.contains(target)) return;

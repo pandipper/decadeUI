@@ -335,9 +335,6 @@ function getConfigsByTab(tabId) {
 			{ key: "mx_decade_characterDialog", name: "自由选将筛选框", type: "select" },
 			{ key: "rightLayout", name: "左右布局", type: "select" },
 			{ key: "eruda", name: "调试助手", type: "toggle" },
-			{ isTitle: true, name: "武将信息" },
-			{ key: "doubleClickSkill", name: "双击角色看技能而非介绍", type: "toggle" },
-			{ key: "skillDescHighlight", name: "技能描述高亮", type: "toggle" },
 		],
 	};
 
